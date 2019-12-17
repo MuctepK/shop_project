@@ -19,6 +19,9 @@ class Product(models.Model):
     def main_image(self):
         return self.images.all().first().image
 
+    def get_images(self):
+        return [item.image for item in self.images.all()]
+
     def __str__(self):
         return self.name
 
