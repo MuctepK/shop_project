@@ -1,18 +1,23 @@
 from django.db import models
-
-
+from ckeditor_uploader.fields import RichTextUploadingField
 # Create your models here.
+
+
 class Product(models.Model):
     name = models.CharField(max_length=512, verbose_name='Название')
-    image = models.ImageField(verbose_name='Картинка', null=True, blank=True, upload_to='product_pics')
     brand = models.ForeignKey('webapp.Brand', on_delete=models.SET_NULL, null=True, blank=True, related_name='products')
     category = models.ForeignKey('webapp.Category', on_delete=models.PROTECT, related_name='products')
     price = models.IntegerField(verbose_name='Цена')
-    description = models.TextField(verbose_name='Описание', default='None')
+    description = RichTextUploadingField('content')
     in_stock = models.BooleanField(verbose_name='В наличии', default=True)
 
     def __str__(self):
         return self.name
+
+
+class Image(models.Model):
+    name = models.ForeignKey('webapp.Product', on_delete=models.CASCADE, related_name='images')
+    image = models.ImageField('Картинка', upload_to='product_pics')
 
 
 class Brand(models.Model):

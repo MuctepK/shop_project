@@ -20,7 +20,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '(5ag1^7tbf7s$ge6^q&k@921_&rcc8tbjlf2foi9gwgha8=kj('
+SECRET_KEY = '#b5g7cg6k@t64*m^-x9m)8(=xm2q@a(tk*14y4-2-*pl^l8=w&'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -37,6 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'widget_tweaks',
+    'ckeditor',
+    'ckeditor_uploader',
+    'django_cleanup.apps.CleanupConfig',
     'webapp',
 ]
 
@@ -76,10 +80,8 @@ WSGI_APPLICATION = 'main.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'OPTIONS': {
-            'read_default_file': '/home/kutman/Desktop/Codes/Python/Web/shop-project/source/main/my.cnf',
-        }
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 
@@ -121,9 +123,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
-LOGIN_REDIRECT_URL = 'webapp:index'
-LOGOUT_REDIRECT_URL = 'webapp:index'
-HOST_NAME = 'localhost:8000'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
-MEDIA_URL = '/media/'
+MEDIA_URL = '/uploads/'
+MEDIA_ROOT = 'uploads'
+CKEDITOR_UPLOAD_PATH = "ckeditor_uploads/"
