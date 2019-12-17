@@ -36,15 +36,15 @@
 							</div>
 
 							<div class="product-preview">
-								<img src="{{product.get_images.0}}" alt="">
+								<img src="{{product.get_images.1}}" alt="">
 							</div>
 
 							<div class="product-preview">
-								<img src="{{product.get_images.0}}" alt="">
+								<img src="{{product.get_images.2}}" alt="">
 							</div>
 
 							<div class="product-preview">
-								<img src="{{product.get_images.0}}" alt="">
+								<img src="{{product.get_images.3}}" alt="">
 							</div>
 						</div>
 					</div>
@@ -65,7 +65,11 @@
 								<a class="review-link" href="#">10 Отзывов | Добавьте свой отзыв</a>
 							</div>
 							<div>
-								<h3 class="product-price">{{product.price}} <del class="product-old-price">$990.00</del></h3>
+								<h3 class="product-price">{{product.price}} c
+                                    {% if product.old_price %}
+                                    <del class="product-old-price">{{ product.old_price }}</del>
+                            {% endif %}
+                                </h3>
                                 {% if product.in_stock %}
 								<span class="product-available">В наличии</span>
                                 {% else %}
