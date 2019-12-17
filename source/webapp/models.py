@@ -16,7 +16,7 @@ class Product(models.Model):
 
 
 class Image(models.Model):
-    name = models.ForeignKey('webapp.Product', on_delete=models.CASCADE, related_name='images')
+    product = models.ForeignKey('webapp.Product', on_delete=models.CASCADE, related_name='images')
     image = models.ImageField('Картинка', upload_to='product_pics')
 
 
@@ -32,6 +32,7 @@ class Brand(models.Model):
 class Category(models.Model):
     name = models.CharField(max_length=256, verbose_name='Название')
     subcategory = models.ForeignKey('self', on_delete=models.CASCADE, related_name='subcategories', null=True, blank=True)
+    image = models.ImageField('Картинка категории', upload_to='categories_pics', null=True)
 
     def __str__(self):
         return self.name
