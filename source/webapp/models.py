@@ -3,6 +3,7 @@ from ckeditor_uploader.fields import RichTextUploadingField
 from django.utils.text import slugify
 from datetime import date
 
+
 class Product(models.Model):
     name = models.CharField(max_length=512, verbose_name='Название')
     brand = models.ForeignKey('webapp.Brand', on_delete=models.SET_NULL, null=True, blank=True, related_name='products')
@@ -63,3 +64,4 @@ class Review(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='reviews')
     mark = models.IntegerField(verbose_name='Оценка')
     verified = models.BooleanField(verbose_name='Подтверждено', default=False)
+    created_at = models.DateField(verbose_name='Дата добавления', auto_now_add=True, null=True)
