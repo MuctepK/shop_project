@@ -55,3 +55,11 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Review(models.Model):
+    author = models.CharField(max_length=128, verbose_name='Автор')
+    text = models.TextField(max_length=512, verbose_name='Текст')
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='reviews')
+    mark = models.IntegerField(verbose_name='Оценка')
+    verified = models.BooleanField(verbose_name='Подтверждено', default=False)
