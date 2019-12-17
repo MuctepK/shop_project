@@ -1,6 +1,6 @@
 from django.db import models
 from ckeditor_uploader.fields import RichTextUploadingField
-# Create your models here.
+from django.utils.text import slugify
 
 
 class Product(models.Model):
@@ -10,6 +10,14 @@ class Product(models.Model):
     price = models.IntegerField(verbose_name='Цена')
     description = RichTextUploadingField('content')
     in_stock = models.BooleanField(verbose_name='В наличии', default=True)
+    slug = models.SlugField(unique=True, null=True, blank=True)
+
+    def save(self, *args, **kwargs):
+        self.slug = self.slug or slugify(self.name)
+        super().save(*args, **kwargs)
+
+    def main_image(self):
+        return self.images.all().first().image
 
     def __str__(self):
         return self.name
